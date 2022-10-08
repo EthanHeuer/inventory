@@ -1,6 +1,9 @@
 function DOM(parent, tagName, tags = {}) {
 	let el = document.createElement(tagName);
-	parent.appendChild(el);
+
+	if (parent !== null) {
+		parent.appendChild(el);
+	}
 
 	for (let key of Object.keys(tags)) {
 		if (typeof tags[key] === "object") {

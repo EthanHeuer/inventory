@@ -116,15 +116,8 @@ button, select {
 	background-color: hsl(220, 20%, 25%);
 }
 
-.location.selected .location-name {
-	display: none;
-}
-
-.location:not(.selected) .location-input {
-	display: none;
-}
-
-.location:not(.selected) > .icon {
+.location.selected .location-name,
+.location:not(.selected) .location-input-holder {
 	display: none;
 }
 

@@ -27,8 +27,7 @@ class Device {
 	}
 
 	initDom() {
-		let item = document.createElement("div");
-		item.classList.add(... "flex-box horizontal device pad".split(" "));
+		let item = DOM(null, "div", {classList: "flex-box horizontal pad device"});
 
 		let name = document.createElement("input");
 		name.classList.add("device-asset");

@@ -18,18 +18,18 @@ class Location {
 	}
 
 	initDom() {
-		let item = document.createElement("div");
-		item.classList.add("location", "flex-box", "horizontal", "gap");
-		item.dataset.action = AppAction.TOGGLE_LOCATION;
-		item.dataset.location = this.id;
-
-		let remove = DOM(item, "button", {innerHTML: "close", classList: "material-symbols-outlined icon", dataset: {action: AppAction.LOCATION_REMOVE, location: this.id}, title: "Remove Location"});
+		let item = DOM(null, "div", {classList: "flex-box horizontal gap location", dataset: {action: AppAction.TOGGLE_LOCATION, location: this.id}});
 
 		let cell1 = DOM(item, "div", {classList: "flex flex-box horizontal"});
 		let name = DOM(cell1, "div", {innerHTML: this.name, classList: "flex location-name", dataset: {action: AppAction.TOGGLE_LOCATION, location: this.id}});
-		let rename = DOM(cell1, "input", {value: this.name, classList: "flex location-input", dataset: {action: AppAction.LOCATION_NAME, location: this.id}});
 
-		let count = DOM(item, "div", {innerHTML: this.devices.length, classList: "location-count"});
+		let rename_cont = DOM(cell1, "div", {classList: "flex flex-box horizontal icon-input location-input-holder"});
+		let rename_icon = DOM(rename_cont, "span", {innerHTML: "edit", classList: "material-symbols-outlined"});
+		let rename = DOM(rename_cont, "input", {value: this.name, classList: "flex location-input", dataset: {action: AppAction.LOCATION_NAME, location: this.id}});
+
+		let count = DOM(item, "div", {innerHTML: this.devices.length, classList: "location-count", dataset: {action: AppAction.TOGGLE_LOCATION, location: this.id}});
+		
+		let remove = DOM(item, "button", {innerHTML: "close", classList: "material-symbols-outlined icon", dataset: {action: AppAction.LOCATION_REMOVE, location: this.id}, title: "Remove Location"});
 
 		this.dom.parent = item;
 		this.dom.name = name;
