@@ -1,0 +1,212 @@
+::-webkit-scrollbar {
+	width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 2px;
+}
+
+body {
+	margin: 0;
+	overflow: hidden;
+	background-color: #191919;
+}
+
+* {
+	font-family: 'Lucida Sans';
+	font-size: 18px;
+	color: #f0f0f0;
+}
+
+input, button, select {
+	background-color: #303030;
+	border-radius: 1em;
+	border: none;
+	padding: 0.25em 1em;
+	outline: none;
+}
+
+button, select {
+	cursor: pointer;
+}
+
+.icon {
+	background-color: transparent;
+	font-size: 1.25em;
+	width: 1.5em;
+	height: 1.5em;
+	padding: 0;
+	opacity: 0.5;
+	border-radius: 50%;
+	
+	transition: all 0.15s ease-in-out;
+}
+
+.icon:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+	opacity: 1;
+}
+
+.flex-box {
+	display: flex;
+	position: relative;
+}
+
+.flex {
+	flex: 1;
+}
+
+.flex-box.horizontal {
+	flex-direction: row;
+}
+
+.flex-box.vertical {
+	flex-direction: column;
+}
+
+.no-scroll {
+	overflow: hidden;
+}
+
+.scroll {
+	overflow: auto;
+}
+
+.fill {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.pad {
+	padding: 0.5em;
+}
+
+.gap {
+	gap: 0.5em;
+}
+
+.location, .device {
+	justify-items: center;
+	align-items: center;
+}
+
+.location {
+	background-color: rgba(255, 255, 255, 0.05);
+	font-size: 1em;
+	border-radius: 0.5em;
+	padding: 1em 0.5em;
+	cursor: pointer;
+}
+
+.location:hover {
+	background-color: rgba(255, 255, 255, 0.07);
+}
+
+.location.selected {
+	background-color: hsl(220, 20%, 25%);
+}
+
+.location.selected .location-name {
+	display: none;
+}
+
+.location:not(.selected) .location-input {
+	display: none;
+}
+
+.location:not(.selected) > .icon {
+	display: none;
+}
+
+.location-input {
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+.location-input, .location-name {
+	padding: 0.5em 1em;
+	width: 8em;
+}
+
+.location-count {
+	border: 1px solid #909090;
+	color: #909090;
+	padding: 0.25em 0.5em;
+	font-size: 0.75em;
+	border-radius: 1em;
+}
+
+.device {
+	border-radius: 0.5em;
+	margin: 0.5em;
+	display: inline-flex;
+	background-color: hsl(220, 10%, 15%);
+
+	transition: all 0.15s ease-in-out;
+}
+
+.device-asset {
+	width: 6em;
+}
+
+.device input,
+.device select {
+	border-radius: 1px;
+	padding: 0.25em 0.5em;
+	background-color: hsl(220, 10%, 15%);
+}
+
+.icon-input input, .icon-input select {
+	background-color: transparent;
+	padding: 0.5em 0.5em;
+}
+
+.icon-input {
+	background-color: rgba(255, 255, 255, 0.05);
+	border-radius: 1em;
+	align-items: center;
+	padding: 0 0.5em;
+}
+
+.center {
+	align-items: center;
+	justify-content: center;
+}
+
+#sheet-name {
+	display: none;
+}
+
+#nav {
+	background-color: hsl(220, 20%, 15%);
+}
+
+#header {
+	background-color: hsl(220, 60%, 30%);
+	width: 100%;
+}
+
+#header .icon-input,
+#header .icon-input input,
+#header .icon-input select {
+	background-color: hsl(220, 60%, 25%);
+}
+
+#device-list {
+	padding: 0 3em;
+	display: inline;
+	text-align: center;
+}
+
+#new-device-asset {
+	width: 8em;
+}
