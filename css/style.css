@@ -203,3 +203,9 @@ button, select {
 #new-device-asset {
 	width: 8em;
 }
+
+#location-header {
+	font-size: 1.5em;
+	opacity: 0.5;
+	text-align: center;
+}

@@ -1,29 +1,29 @@
 App.prototype.handleClick = function (event) {
 	let action = event.target.dataset.action;
-	let device_id = Number(event.target.dataset.device);
+	let id = Number(event.target.dataset.id);
 
 	if (action) {
 		switch (action) {
 
 		// select a location to view
-		case AppAction.TOGGLE_LOCATION:
-			this.active_location_id = Number(event.target.dataset[action]);
+		case AppAction.LOCATION_VIEW:
+			this.active_location_id = id;
 
 			this.updateDom();
 			this.loadDevices();
 
 		// change devices type
 		break; case AppAction.DEVICE_TYPE:
-			this.activeLocation().getDevice(device_id).type = event.target.value;
+			this.activeLocation().getDevice(id).type = event.target.value;
 
 		// change devices model
 		break; case AppAction.DEVICE_MODEL:
-			this.activeLocation().getDevice(device_id).model = event.target.value;
+			this.activeLocation().getDevice(id).model = event.target.value;
 		
 		// remove device from active location
 		break; case AppAction.DEVICE_REMOVE:
 			for (let i = 0; i < this.activeLocation().devices.length; i ++) {
-				if (this.activeLocation().devices[i].id === device_id) {
+				if (this.activeLocation().devices[i].id === id) {
 					this.activeLocation().devices.splice(i, 1);
 					break;
 				}
@@ -34,11 +34,9 @@ App.prototype.handleClick = function (event) {
 		
 		// remove location
 		break; case AppAction.LOCATION_REMOVE:
-			let remove_id = Number(event.target.getAttribute(`data-location`));
-
 			let i;
 			for (i = 0; i < this.locations.length; i ++) {
-				if (this.locations[i].id === remove_id) { break; }
+				if (this.locations[i].id === id) { break; }
 			}
 
 			if (window.confirm(`Are you sure you want to delete ${this.locations[i].name} and all of its devices?`)) {
@@ -46,11 +44,7 @@ App.prototype.handleClick = function (event) {
 
 				if (i >= this.locations.length) { i -= 1; }
 
-				if (i === -1) {
-					this.active_location_id = -1;
-				} else {
-					this.active_location_id = this.locations[i].id;
-				}
+				this.active_location_id = (i === -1 ? -1 : this.locations[i].id);
 
 				this.loadLocations();
 				this.loadDevices();
@@ -71,34 +65,44 @@ App.prototype.handleClick = function (event) {
 
 App.prototype.handleKeyUp = function (event) {
 	let action = event.target.dataset.action;
+	let id = Number(event.target.dataset.id);
 
-	if (action && event.key === "Enter") {
-		if (action === AppAction.DEVICE_NEW && this.active_location_id !== -1) {
-			this.activeLocation().addDevice(
-				document.getElementById("new-device-asset").value,
-				document.getElementById("new-device-model").value,
-				document.getElementById("new-device-type").value
-			);
+	if (action) {
+		switch (action) {
 
-			this.loadDevices();
+		// new device
+		case AppAction.DEVICE_NEW:
+			if (event.key === "Enter" && this.active_location_id !== -1) {
+				this.activeLocation().addDevice(
+					document.getElementById("new-device-asset").value,
+					document.getElementById("new-device-model").value,
+					document.getElementById("new-device-type").value
+				);
+	
+				this.loadDevices();
+	
+				document.getElementById("new-device-asset").value = "";
+			}
 
-			document.getElementById("new-device-asset").value = "";
+		// rename location
+		break; case AppAction.LOCATION_NAME:
+			if (this.active_location_id !== -1) {
+				this.locations.get(id).name = event.target.value;
+				this.locations.get(id).updateDom();
+			}
 
-		} else if (action === AppAction.LOCATION_NAME && this.active_location_id !== -1) {
-			let location_id = Number(event.target.dataset.location);
-			this.getLocation(location_id).name = event.target.value;
-			this.getLocation(location_id).updateDom();
+		// new location
+		break; case AppAction.LOCATION_NEW:
+			if (event.key === "Enter") {
+				this.addLocation(event.target.value);
+				this.updateDom();
 
-		} else if (action === AppAction.LOCATION_NEW) {
-			this.addLocation(event.target.value);
-			this.updateDom();
+				event.target.value = "";
+			}
 
-			event.target.value = "";
-
-		} else if (action === AppAction.DEVICE_ASSET) {
-			let device_id = Number(event.target.dataset.device);
-
-			this.activeLocation().getDevice(device_id).asset = event.target.value;
+		// change device asset
+		break; case AppAction.DEVICE_ASSET:
+			this.activeLocation().getDevice(id).asset = event.target.value;
 		}
 	}
 

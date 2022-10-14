@@ -1,6 +1,4 @@
 class AppAction {
-	static TOGGLE_LOCATION = "location";
-
 	static DEVICE_ASSET = "device-asset";
 	static DEVICE_MODEL = "device-model";
 	static DEVICE_TYPE = "device-type";
@@ -10,6 +8,7 @@ class AppAction {
 	static LOCATION_NAME = "location-name";
 	static LOCATION_REMOVE = "location-remove";
 	static LOCATION_NEW = "location-new";
+	static LOCATION_VIEW = "location-view";
 
 	static APP_EXPORT = "app-export";
 	static APP_CLEAR = "app-clear";
@@ -18,14 +17,11 @@ class AppAction {
 const LOCALSTORAGE_KEY = "inventory";
 
 class App {
-	locations = [];
+	locations = new ArrayMap();
 	active_location_id = -1;
 	current_location_id = 0;
 
 	init() {
-		window.addEventListener("click", (event) => { this.handleClick(event); });
-		window.addEventListener("keyup", (event) => { this.handleKeyUp(event); });
-
 		let parse = JSON.parse(window.localStorage.getItem(LOCALSTORAGE_KEY)) || [];
 
 		for (let location of parse) {
@@ -35,6 +31,12 @@ class App {
 				this.activeLocation().addDevice(... device);
 			}
 		}
+		
+		var DATE = new Date();
+		document.getElementById("sheet-name").value = `inventory-${DATE.getMonth() + 1}-${DATE.getDate()}-${DATE.getFullYear()}`;
+
+		window.addEventListener("click", (event) => { this.handleClick(event); });
+		window.addEventListener("keyup", (event) => { this.handleKeyUp(event); });
 
 		this.loadLocations();
 		this.loadDevices();
@@ -43,24 +45,23 @@ class App {
 	loadLocations() {
 		document.getElementById("location-list").innerHTML = "";
 
-		for (let l = 0; l < this.locations.length; l ++) {
-			document.getElementById("location-list").appendChild(this.locations[l].dom.parent);
+		for (let l = 0; l < this.locations.length(); l ++) {
+			document.getElementById("location-list").appendChild(this.locations.at(l).dom.parent);
 
-			if (this.locations[l].id === this.active_location_id) {
-				this.locations[l].dom.parent.classList.add("selected");
-			} else {
-				this.locations[l].dom.parent.classList.remove("selected");
-			}
+			toggleClass(this.locations.at(l).dom.parent, this.locations.at(l).id === this.active_location_id, "selected");
 		}
 	}
 
 	loadDevices() {
 		document.getElementById("device-list").innerHTML = "";
+		document.getElementById("location-header").innerHTML = "";
 
 		if (this.active_location_id !== -1) {
-			for (let d = 0; d < this.activeLocation().devices.length; d ++) {
-				document.getElementById("device-list").appendChild(this.activeLocation().devices[d].dom.parent);
+			for (let d = 0; d < this.activeLocation().devices.length(); d ++) {
+				document.getElementById("device-list").appendChild(this.activeLocation().devices.at(d).dom.parent);
 			}
+
+			document.getElementById("location-header").innerHTML = this.activeLocation().name;
 		}
 	}
 
@@ -75,140 +76,45 @@ class App {
 		this.current_location_id += 1;
 	}
 
-	getLocation(id) {
-		for (let l = 0; l < this.locations.length; l ++) {
-			if (this.locations[l].id === id) {
-				return this.locations[l];
-			}
+	updateDom() {
+		for (let l = 0; l < this.locations.length(); l ++) {
+			let loc = this.locations.at(l);
+
+			toggleClass(loc.dom.parent, loc.id === this.active_location_id, "selected");
 		}
 	}
 
-	export() {
-		let data = [
-			["Location", "Asset", "Year", "Model", "Type"]
-		];
+	activeLocation() { return this.locations.get(this.active_location_id); }
+}
 
-		for (let l = 0; l < this.locations.length; l ++) {
-			data.push(... this.locations[l].export());
-		}
+App.prototype.clear = function () {
+	if (window.confirm("Are you sure you want to delete all locations and all devices?")) {
+		this.active_location_id = -1;
+		this.current_location_id = 0;
+		this.locations = new ArrayMap();
 
-		let unique = [];
+		window.localStorage.removeItem(LOCALSTORAGE_KEY);
 
-		for (let r = 1; r < data.length; r ++) {
-			let isUnique = true;
+		this.loadLocations();
+		this.loadDevices();
+	}
+};
 
-			for (let u = 0; u < unique.length; u ++) {
-				if (
-					data[r][2] === unique[u][0] &&
-					data[r][3] === unique[u][1] &&
-					data[r][4] === unique[u][2]
-				) {
-					isUnique = false; break;
-				}
-			}
+App.prototype.save = function () {
+	let output = [];
 
-			if (isUnique) {
-				unique.push([data[r][2], data[r][3], data[r][4]]);
-			}
-		}
-
-		for (let i = 0; i < unique.length; i ++) {
-			for (let j = i + 1; j < unique.length; j ++) {
-				let [E, C, A, F, D, B] = [... unique[i], ... unique[j]];
-
-				let G = A < B;
-				let H = A === B;
-				let I = C > D;
-				let J = C === D;
-				let K = E > F;
-
-				if (G || H && I || H && J && K) {
-					let temp = [... unique[i]];
-					unique[i] = [... unique[j]];
-					unique[j] = temp;
-				}
-			}
-		}
-
-		for (let u = 0; u < unique.length; u ++) {
-			data[0].push(unique[u].join(" "));
-
-			for (let r = 1; r < data.length; r ++) {
-				data[r].push("");
-			}
-		}
-
-		for (let r = 1; r < data.length; r ++) {
-			for (let u = 0; u < unique.length; u ++) {
-				if (
-					data[r][2] === unique[u][0] &&
-					data[r][3] === unique[u][1] &&
-					data[r][4] === unique[u][2]
-				) {
-					data[r][5 + u] = data[r][1];
-				}
-			}
-		}
-
+	for (let l = 0; l < this.locations.length(); l ++) {
+		let loc = this.locations.at(l);
 		let res = [];
 
-		for (let r = 0; r < data.length; r ++) {
-			res.push(data[r].join("\t"));
+		for (let d = 0; d < loc.devices.length(); d ++) {
+			let device = loc.devices.at(d);
+
+			res.push([device.asset, device.model, device.type]);
 		}
 
-		let a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([res.join("\n")], {type: 'text/tsv'}));
-		a.download = `${document.getElementById("sheet-name").value}.tsv`;
-
-		document.body.appendChild(a);
-		//a.click();
-		document.body.removeChild(a);
+		output.push([loc.name, res]);
 	}
 
-	updateDom() {
-		for (let loc of this.locations) {
-			if (loc.id === this.active_location_id) {
-				loc.dom.parent.classList.add("selected");
-			} else {
-				loc.dom.parent.classList.remove("selected");
-			}
-		}
-	}
-
-	clear() {
-		if (window.confirm("Are you sure you want to delete all locations and all devices?")) {
-			this.active_location_id = -1;
-			this.current_location_id = 0;
-			this.locations = [];
-
-			window.localStorage.removeItem(LOCALSTORAGE_KEY);
-
-			this.loadLocations();
-			this.loadDevices();
-		}
-	}
-
-	activeLocation() {
-		for (let l = 0; l < this.locations.length; l ++) {
-			if (this.locations[l].id === this.active_location_id) {
-				return this.locations[l];
-			}
-		}
-	}
-
-	save() {
-		let output = [];
-
-		for (let loc of this.locations) {
-			let res = [];
-
-			for (let device of loc.devices) {
-				res.push([device.asset, device.model, device.type]);
-			}
-
-			output.push([loc.name, res]);
-		}
-
-		window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(output));
-	}
-}
+	window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(output));
+};
