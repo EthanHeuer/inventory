@@ -34,6 +34,7 @@ class App {
 		
 		var DATE = new Date();
 		document.getElementById("sheet-name").value = `inventory-${DATE.getMonth() + 1}-${DATE.getDate()}-${DATE.getFullYear()}`;
+		document.title = document.getElementById("sheet-name").value;
 
 		window.addEventListener("click", (event) => { this.handleClick(event); });
 		window.addEventListener("keyup", (event) => { this.handleKeyUp(event); });
