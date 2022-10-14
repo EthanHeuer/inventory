@@ -58,7 +58,7 @@ class App {
 		document.getElementById("location-header").innerHTML = "";
 
 		if (this.active_location_id !== -1) {
-			for (let d = 0; d < this.activeLocation().devices.length(); d ++) {
+			for (let d = this.activeLocation().devices.length() - 1; d >= 0; d --) {
 				document.getElementById("device-list").appendChild(this.activeLocation().devices.at(d).dom.parent);
 			}
 

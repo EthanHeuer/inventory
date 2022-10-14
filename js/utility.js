@@ -48,12 +48,8 @@ class ArrayMap {
 	}
 
 	get(id) { return this.#data[this.getIndex(id)]; }
-
 	at(index) { return this.#data[index]; }
-
 	push(... items) { this.#data.push(... items); }
-
 	remove(id) { this.#data.splice(this.getIndex(id), 1); }
-
 	length() { return this.#data.length; }
 }

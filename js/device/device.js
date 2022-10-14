@@ -9,14 +9,16 @@ class DeviceType {
 	static FACULTY = "Faculty";
 }
 
-class Device {
+class Device extends ArrayMapItem {
 	dom = new DeviceDOM();
 
 	constructor (asset, model, type, id) {
+		super(id);
+
 		this.asset = asset;
 		this.model = model;
 		this.type = type;
-		this.id = id;
+		this.time = Date.now();
 
 		this.initDom();
 	}

@@ -7,7 +7,6 @@ class DeviceDOM {
 
 	init(id) {
 		let item = DOM(null, "div", {classList: "flex-box horizontal pad device"});
-
 		let name = DOM(item, "input", {classList: "device-asset", dataset: {action: AppAction.DEVICE_ASSET}});
 
 		let model = DOM(item, "select", {classList: "device-model", dataset: {action: AppAction.DEVICE_MODEL}});
