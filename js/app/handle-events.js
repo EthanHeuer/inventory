@@ -14,37 +14,29 @@ App.prototype.handleClick = function (event) {
 
 		// change devices type
 		break; case AppAction.DEVICE_TYPE:
-			this.activeLocation().getDevice(id).type = event.target.value;
+			this.activeLocation().devices.get(id).type = event.target.value;
 
 		// change devices model
 		break; case AppAction.DEVICE_MODEL:
-			this.activeLocation().getDevice(id).model = event.target.value;
+			this.activeLocation().devices.get(id).model = event.target.value;
 		
 		// remove device from active location
 		break; case AppAction.DEVICE_REMOVE:
-			for (let i = 0; i < this.activeLocation().devices.length; i ++) {
-				if (this.activeLocation().devices[i].id === id) {
-					this.activeLocation().devices.splice(i, 1);
-					break;
-				}
-			}
+			this.activeLocation().devices.remove(id);
 
 			this.loadDevices();
 			this.activeLocation().updateDom();
 		
 		// remove location
 		break; case AppAction.LOCATION_REMOVE:
-			let i;
-			for (i = 0; i < this.locations.length; i ++) {
-				if (this.locations[i].id === id) { break; }
-			}
+			let i = this.locations.getIndex(id);
 
-			if (window.confirm(`Are you sure you want to delete ${this.locations[i].name} and all of its devices?`)) {
-				this.locations.splice(i, 1);
+			if (window.confirm(`Are you sure you want to delete ${this.locations.at(i).name} and all of its devices?`)) {
+				this.locations.remove(id);
 
-				if (i >= this.locations.length) { i -= 1; }
+				if (i >= this.locations.length()) { i -= 1; }
 
-				this.active_location_id = (i === -1 ? -1 : this.locations[i].id);
+				this.active_location_id = (i === -1 ? -1 : this.locations.at(i).id);
 
 				this.loadLocations();
 				this.loadDevices();
@@ -102,7 +94,7 @@ App.prototype.handleKeyUp = function (event) {
 
 		// change device asset
 		break; case AppAction.DEVICE_ASSET:
-			this.activeLocation().getDevice(id).asset = event.target.value;
+			this.activeLocation().devices.get(id).asset = event.target.value;
 		}
 	}
 

@@ -53,5 +53,7 @@ class ArrayMap {
 
 	push(... items) { this.#data.push(... items); }
 
+	remove(id) { this.#data.splice(this.getIndex(id), 1); }
+
 	length() { return this.#data.length; }
 }
