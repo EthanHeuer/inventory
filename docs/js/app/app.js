@@ -24,22 +24,6 @@ class App {
 	init() {
 		let parse = JSON.parse(window.localStorage.getItem(LOCALSTORAGE_KEY)) || [];
 
-		let data = [];
-
-		for (let l = 0; l < 10; l ++) {
-			data[l] = [`Location ${l + 1}`, []];
-
-			for (let c = 0; c < 50; c ++) {
-				data[l][1][c] = [
-					"" + (201900000 + Math.floor(Math.random() * 400000)),
-					(Math.random() < 0.4 ? "Mac" : "HP"),
-					(Math.random() < 0.1 ? "Loaner" : "Student")
-				];
-			}
-		}
-
-		parse = data;
-
 		for (let location of parse) {
 			this.addLocation(location[0]);
 
