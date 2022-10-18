@@ -10,6 +10,10 @@ class DeviceType {
 }
 
 class Device extends ArrayMapItem {
+	asset;
+	model;
+	type;
+	time;
 	dom = new DeviceDOM();
 
 	constructor (asset, model, type, id) {

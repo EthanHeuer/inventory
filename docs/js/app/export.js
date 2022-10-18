@@ -1,5 +1,8 @@
 App.prototype.export = function () {
-	let data = [["Location", "Asset", "Year", "Model", "Type"]];
+	let data = [
+		["Location", "Asset", "Year", "Model", "Type"],
+		[]
+	];
 
 	for (let l = 0; l < this.locations.length(); l ++) {
 		data.push(... this.locations.at(l).export());
@@ -8,7 +11,7 @@ App.prototype.export = function () {
 	// find all unique device identifiers
 	let unique = [];
 
-	for (let r = 1; r < data.length; r ++) {
+	for (let r = 2; r < data.length; r ++) {
 		let isUnique = true;
 
 		for (let u = 0; u < unique.length; u ++) {
@@ -40,17 +43,28 @@ App.prototype.export = function () {
 	for (let u = 0; u < unique.length; u ++) {
 		data[0].push(unique[u].join(" "));
 
-		for (let r = 1; r < data.length; r ++) {
+		for (let r = 2; r < data.length; r ++) {
 			data[r].push("");
 		}
 	}
 
 	// add device asset to identifier row
-	for (let r = 1; r < data.length; r ++) {
+	for (let r = 2; r < data.length; r ++) {
 		for (let u = 0; u < unique.length; u ++) {
 			if (data[r][2] === unique[u][0] && data[r][3] === unique[u][1] && data[r][4] === unique[u][2]) {
 				data[r][5 + u] = data[r][1];
 			}
+		}
+	}
+
+	let column_char = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	let MAX = data.length;
+
+	for (let d = 0; d < data[0].length; d ++) {
+		if (d > 4 || d === 1) {
+			data[1][d] = `=COUNTA(${column_char[d]}3:${column_char[d]}${MAX})`;
+		} else if (d === 0) {
+			data[1][d] = `=COUNTA(UNIQUE(${column_char[d]}3:${column_char[d]}${MAX}))`;
 		}
 	}
 

@@ -1,4 +1,7 @@
 class Location extends ArrayMapItem {
+	name;
+	devices;
+	selected = false;
 	dom = new LocationDOM();
 
 	new_id = 0;
@@ -8,7 +11,6 @@ class Location extends ArrayMapItem {
 		
 		this.name = name;
 		this.devices = new ArrayMap();
-		this.selected = false;
 
 		this.initDom();
 	}
