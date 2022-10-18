@@ -47,9 +47,32 @@ class ArrayMap {
 		return -1;
 	}
 
-	get(id) { return this.#data[this.getIndex(id)]; }
-	at(index) { return this.#data[index]; }
+	get(id) {
+		let index = this.getIndex(id);
+
+		if (index !== -1) {
+			return this.#data[index];
+		}
+
+		return null;
+	}
+
+	at(index) {
+		if (index >= 0 && index < this.#data.length) {
+			return this.#data[index];
+		}
+	}
+
 	push(... items) { this.#data.push(... items); }
-	remove(id) { this.#data.splice(this.getIndex(id), 1); }
+	
+	remove(id) {
+		let index = this.getIndex(id);
+
+		if (index !== -1) {
+			return this.#data.splice(index, 1);
+		}
+
+		return null;
+	}
 	length() { return this.#data.length; }
 }

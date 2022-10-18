@@ -102,21 +102,23 @@ button, select {
 }
 
 .location {
-	background-color: rgba(255, 255, 255, 0.05);
+	background-color: rgba(255, 255, 255, 0.03);
+	border: 2px solid transparent;
 	font-size: 1em;
 	border-radius: 0.5em;
 	padding: 1em 0.5em;
 	cursor: pointer;
 
-	transition: all 0.15s ease-in-out;
+	transition: background-color 0.15s ease-in-out;
 }
 
 .location:hover {
-	background-color: rgba(255, 255, 255, 0.07);
+	background-color: rgba(255, 255, 255, 0.05);
 }
 
 .location.selected {
-	background-color: hsl(220, 20%, 25%);
+	background-color: rgba(255, 255, 255, 0.07);
+	border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .location.selected .location-name,
@@ -142,23 +144,23 @@ button, select {
 }
 
 .device {
-	border-radius: 0.5em;
+	border-radius: 1em;
 	margin: 0.25em;
 	display: inline-flex;
-	background-color: hsl(220, 10%, 15%);
+	background-color: hsl(220, 0%, 13%);
 
 	transition: all 0.15s ease-in-out;
-}
-
-.device-asset {
-	width: 6em;
 }
 
 .device input,
 .device select {
 	border-radius: 1px;
 	padding: 0.25em 0.5em;
-	background-color: hsl(220, 10%, 15%);
+	background-color: hsl(220, 0%, 13%);
+}
+
+.device-asset {
+	width: 6em;
 }
 
 .icon-input input, .icon-input select {
@@ -183,17 +185,19 @@ button, select {
 }
 
 #nav {
-	background-color: hsl(220, 20%, 15%);
+	background-color: rgba(255, 255, 255, 0.01);
+	border-right: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 #header {
-	background-color: hsl(220, 60%, 30%);
+	background-color: hsl(220, 0%, 15%);
+	border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 #header .icon-input,
 #header .icon-input input,
 #header .icon-input select {
-	background-color: hsl(220, 60%, 25%);
+	background-color: hsl(220, 0%, 18%);
 }
 
 #device-list {

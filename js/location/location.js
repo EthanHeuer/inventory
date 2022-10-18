@@ -1,7 +1,7 @@
 class Location extends ArrayMapItem {
 	dom = new LocationDOM();
 
-	current_device_id = 0;
+	new_id = 0;
 
 	constructor (name, id) {
 		super(id);
@@ -26,9 +26,9 @@ class Location extends ArrayMapItem {
 	}
 
 	addDevice(asset, model, type) {
-		this.devices.push(new Device(asset, model, type, this.current_device_id));
+		this.devices.push(new Device(asset, model, type, this.new_id));
 
-		this.current_device_id += 1;
+		this.new_id += 1;
 		this.updateDom();
 	}
 
