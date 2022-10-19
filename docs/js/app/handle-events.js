@@ -74,14 +74,14 @@ App.prototype.handleKeyUp = function (event) {
 				this.loadDevices();
 	
 				document.getElementById("new-device-asset").value = "";
+			} else {
+				window.alert("A location must be added first");
 			}
 
 		// rename location
 		break; case AppAction.LOCATION_NAME:
-			if (this.active_location_id !== -1) {
-				this.locations.get(id).name = event.target.value;
-				this.locations.get(id).updateDom();
-			}
+			this.locations.get(id).name = event.target.value;
+			this.locations.get(id).updateDom();
 
 		// new location
 		break; case AppAction.LOCATION_NEW:
