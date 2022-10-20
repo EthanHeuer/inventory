@@ -6,7 +6,7 @@ class DeviceDOM {
 	remove;
 
 	init(id) {
-		let item = DOM(null, "div", {classList: "flex-box horizontal pad device"});
+		let item = DOM(null, "div", {classList: "flex-box horizontal pad device center"});
 		let name = DOM(item, "input", {classList: "device-asset",
 			dataset: {action: AppAction.DEVICE_ASSET, id: id}});
 

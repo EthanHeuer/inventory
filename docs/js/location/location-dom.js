@@ -6,7 +6,7 @@ class LocationDOM {
 	remove;
 
 	init(id) {
-		let item = DOM(null, "div", {classList: "flex-box horizontal gap location",
+		let item = DOM(null, "div", {classList: "flex-box horizontal gap location center",
 			dataset: {action: AppAction.LOCATION_VIEW, id: id}});
 
 		let cell1 = DOM(item, "div", {classList: "flex flex-box horizontal"});

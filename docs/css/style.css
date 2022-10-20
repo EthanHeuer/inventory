@@ -1,42 +1,3 @@
-::-webkit-scrollbar {
-	width: 4px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-	background: transparent;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-	background: #888;
-	border-radius: 2px;
-}
-
-body {
-	margin: 0;
-	overflow: hidden;
-	background-color: #191919;
-}
-
-* {
-	font-family: 'Lucida Sans';
-	font-size: 18px;
-	color: #f0f0f0;
-}
-
-input, button, select {
-	background-color: #303030;
-	border-radius: 1em;
-	border: none;
-	padding: 0.25em 1em;
-	outline: none;
-}
-
-button, select {
-	cursor: pointer;
-}
-
 .icon {
 	background-color: transparent;
 	font-size: 1.25em;
@@ -54,52 +15,51 @@ button, select {
 	opacity: 1;
 }
 
-.flex-box {
-	display: flex;
-	position: relative;
+.icon-input input, .icon-input select {
+	background-color: transparent;
+	padding: 0.5em 0.5em;
 }
 
-.flex {
-	flex: 1;
-}
-
-.flex-box.horizontal {
-	flex-direction: row;
-}
-
-.flex-box.vertical {
-	flex-direction: column;
-}
-
-.no-scroll {
-	overflow: hidden;
-}
-
-.scroll {
-	overflow: auto;
-}
-
-.fill {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	box-sizing: border-box;
-}
-
-.pad {
-	padding: 0.5em;
-}
-
-.gap {
-	gap: 0.5em;
-}
-
-.location, .device {
-	justify-items: center;
+.icon-input {
+	background-color: rgba(255, 255, 255, 0.05);
+	border-radius: 1em;
 	align-items: center;
+	padding: 0 0.5em;
 }
+
+#sheet-name {
+	display: none;
+}
+
+#nav {
+	background-color: rgba(255, 255, 255, 0.01);
+	border-right: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#header {
+	background-color: hsl(220, 0%, 15%);
+	border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#header .icon-input,
+#header .icon-input input,
+#header .icon-input select {
+	background-color: hsl(220, 0%, 18%);
+}
+
+#location-header {
+	font-size: 1.5em;
+	opacity: 0.5;
+	text-align: center;
+}
+
+#new-device-asset {
+	width: 8em;
+}
+
+
+
+/* LOCATION STYLE */
 
 .location {
 	background-color: rgba(255, 255, 255, 0.03);
@@ -137,81 +97,38 @@ button, select {
 
 .location-count {
 	border: 1px solid #909090;
-	color: #909090;
-	padding: 0.25em 0.5em;
-	font-size: 0.75em;
 	border-radius: 1em;
+	color: #909090;
+	font-size: 0.75em;
+	padding: 0.25em 0.5em;
+}
+
+
+
+/* DEVICE STYLE */
+
+#device-list {
+	display: inline;
+	padding: 0 3em;
+	text-align: center;
 }
 
 .device {
-	border-radius: 1em;
-	margin: 0.25em;
-	display: inline-flex;
 	background-color: hsl(220, 0%, 13%);
+	border-radius: 1em;
+	display: inline-flex;
+	margin: 0.25em;
 
 	transition: all 0.15s ease-in-out;
 }
 
 .device input,
 .device select {
+	background-color: hsl(220, 0%, 13%);
 	border-radius: 1px;
 	padding: 0.25em 0.5em;
-	background-color: hsl(220, 0%, 13%);
 }
 
 .device-asset {
 	width: 6em;
-}
-
-.icon-input input, .icon-input select {
-	background-color: transparent;
-	padding: 0.5em 0.5em;
-}
-
-.icon-input {
-	background-color: rgba(255, 255, 255, 0.05);
-	border-radius: 1em;
-	align-items: center;
-	padding: 0 0.5em;
-}
-
-.center {
-	align-items: center;
-	justify-content: center;
-}
-
-#sheet-name {
-	display: none;
-}
-
-#nav {
-	background-color: rgba(255, 255, 255, 0.01);
-	border-right: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-#header {
-	background-color: hsl(220, 0%, 15%);
-	border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-#header .icon-input,
-#header .icon-input input,
-#header .icon-input select {
-	background-color: hsl(220, 0%, 18%);
-}
-
-#device-list {
-	padding: 0 3em;
-	display: inline;
-	text-align: center;
-}
-
-#new-device-asset {
-	width: 8em;
-}
-
-#location-header {
-	font-size: 1.5em;
-	opacity: 0.5;
-	text-align: center;
 }
