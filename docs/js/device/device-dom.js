@@ -1,3 +1,6 @@
+/**
+ * DOM for a device object
+ */
 class DeviceDOM {
 	parent;
 	asset;

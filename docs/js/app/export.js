@@ -1,4 +1,7 @@
-App.prototype.export = function () {
+/**
+ * Format and the export the data to a TSV file
+ */
+App.prototype.dataExport = function () {
 	let data = [
 		["Location", "Asset", "Year", "Model", "Type"],
 		[]

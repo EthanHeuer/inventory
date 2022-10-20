@@ -1,3 +1,6 @@
+/**
+ * Enum of app actions
+ */
 class AppAction {
 	static DEVICE_ASSET = "device-asset";
 	static DEVICE_MODEL = "device-model";
@@ -14,15 +17,16 @@ class AppAction {
 	static APP_CLEAR = "app-clear";
 }
 
-const LOCALSTORAGE_KEY = "inventory";
-
 class App {
 	locations = new ArrayMap();
 	active_location_id = -1;
 	current_location_id = 0;
 
+	static LOCALSTORAGE_KEY = "inventory";
+
 	init() {
-		let parse = JSON.parse(window.localStorage.getItem(LOCALSTORAGE_KEY)) || [];
+		// load data from localstorage
+		let parse = JSON.parse(window.localStorage.getItem(App.LOCALSTORAGE_KEY)) || [];
 
 		for (let location of parse) {
 			this.addLocation(location[0]);
@@ -32,18 +36,21 @@ class App {
 			}
 		}
 		
+		// set the sheet name
 		var DATE = new Date();
 		document.getElementById("sheet-name").value = `inventory-${DATE.getMonth() + 1}-${DATE.getDate()}-${DATE.getFullYear()}`;
 		document.title = document.getElementById("sheet-name").value;
 
+		// load events
 		window.addEventListener("click", (event) => { this.handleClick(event); });
 		window.addEventListener("keyup", (event) => { this.handleKeyUp(event); });
 
-		this.loadLocations();
-		this.loadDevices();
+		// update dom
+		this.updateLocationDom();
+		this.updateDeviceDom();
 	}
 
-	loadLocations() {
+	updateLocationDom() {
 		document.getElementById("location-list").innerHTML = "";
 
 		for (let l = 0; l < this.locations.length(); l ++) {
@@ -53,7 +60,7 @@ class App {
 		}
 	}
 
-	loadDevices() {
+	updateDeviceDom() {
 		document.getElementById("device-list").innerHTML = "";
 		document.getElementById("location-header").innerHTML = "";
 
@@ -72,7 +79,7 @@ class App {
 		this.active_location_id = this.current_location_id;
 		
 		document.getElementById("location-list").appendChild(this.activeLocation().dom.parent);
-		this.loadDevices();
+		this.updateDeviceDom();
 
 		this.current_location_id += 1;
 	}
@@ -88,20 +95,26 @@ class App {
 	activeLocation() { return this.locations.get(this.active_location_id); }
 }
 
-App.prototype.clear = function () {
+/**
+ * Remove all data and update the DOM
+ */
+App.prototype.dataClear = function () {
 	if (window.confirm("Are you sure you want to delete all locations and all devices?")) {
 		this.active_location_id = -1;
 		this.current_location_id = 0;
 		this.locations = new ArrayMap();
 
-		window.localStorage.removeItem(LOCALSTORAGE_KEY);
+		window.localStorage.removeItem(App.LOCALSTORAGE_KEY);
 
-		this.loadLocations();
-		this.loadDevices();
+		this.updateLocationDom();
+		this.updateDeviceDom();
 	}
 };
 
-App.prototype.save = function () {
+/**
+ * Save the data to localstorage
+ */
+App.prototype.dataSave = function () {
 	let output = [];
 
 	for (let l = 0; l < this.locations.length(); l ++) {
@@ -117,5 +130,5 @@ App.prototype.save = function () {
 		output.push([loc.name, res]);
 	}
 
-	window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(output));
+	window.localStorage.setItem(App.LOCALSTORAGE_KEY, JSON.stringify(output));
 };

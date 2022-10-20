@@ -10,7 +10,7 @@ App.prototype.handleClick = function (event) {
 			this.active_location_id = id;
 
 			this.updateDom();
-			this.loadDevices();
+			this.updateDeviceDom();
 
 		// change devices type
 		break; case AppAction.DEVICE_TYPE:
@@ -24,7 +24,7 @@ App.prototype.handleClick = function (event) {
 		break; case AppAction.DEVICE_REMOVE:
 			this.activeLocation().devices.remove(id);
 
-			this.loadDevices();
+			this.updateDeviceDom();
 			this.activeLocation().updateDom();
 		
 		// remove location
@@ -38,21 +38,21 @@ App.prototype.handleClick = function (event) {
 
 				this.active_location_id = (i === -1 ? -1 : this.locations.at(i).id);
 
-				this.loadLocations();
-				this.loadDevices();
+				this.updateLocationDom();
+				this.updateDeviceDom();
 			}
 	
 		// export data
 		break; case AppAction.APP_EXPORT:
-			this.export();
+			this.dataExport();
 
 		// clear data
 		break; case AppAction.APP_CLEAR:
-			this.clear();
+			this.dataClear();
 		}
 	}
 
-	this.save();
+	this.dataSave();
 };
 
 App.prototype.handleKeyUp = function (event) {
@@ -71,7 +71,7 @@ App.prototype.handleKeyUp = function (event) {
 					document.getElementById("new-device-type").value
 				);
 	
-				this.loadDevices();
+				this.updateDeviceDom();
 	
 				document.getElementById("new-device-asset").value = "";
 			} else {
@@ -98,5 +98,5 @@ App.prototype.handleKeyUp = function (event) {
 		}
 	}
 
-	this.save();
+	this.dataSave();
 };

@@ -1,8 +1,14 @@
+/**
+ * Enum for a device model
+ */
 class DeviceModel {
 	static HP = "HP";
 	static MAC = "Mac";
 }
 
+/**
+ * Enum for a device type
+ */
 class DeviceType {
 	static STUDENT = "Student";
 	static LOANER = "Loaner";

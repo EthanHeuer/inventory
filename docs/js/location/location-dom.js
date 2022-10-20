@@ -1,3 +1,6 @@
+/**
+ * DOM for a location object
+ */
 class LocationDOM {
 	parent;
 	name;
