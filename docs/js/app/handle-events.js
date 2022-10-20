@@ -36,7 +36,7 @@ App.prototype.handleClick = function (event) {
 
 				if (i >= this.locations.length()) { i -= 1; }
 
-				this.active_location_id = (i === -1 ? -1 : this.locations.at(i).id);
+				this.active_location_id = (i === -1 ? -1 : this.locations.at(i).key);
 
 				this.updateLocationDom();
 				this.updateDeviceDom();
@@ -64,18 +64,21 @@ App.prototype.handleKeyUp = function (event) {
 
 		// new device
 		case AppAction.DEVICE_NEW:
-			if (event.key === "Enter" && this.active_location_id !== -1) {
-				this.activeLocation().addDevice(
-					document.getElementById("new-device-asset").value,
-					document.getElementById("new-device-model").value,
-					document.getElementById("new-device-type").value
-				);
-	
-				this.updateDeviceDom();
-	
-				document.getElementById("new-device-asset").value = "";
-			} else {
-				window.alert("A location must be added first");
+			if (event.key === "Enter") {
+
+				if (this.active_location_id !== -1) {
+					this.activeLocation().addDevice(
+						document.getElementById("new-device-asset").value,
+						document.getElementById("new-device-model").value,
+						document.getElementById("new-device-type").value
+					);
+		
+					this.updateDeviceDom();
+		
+					document.getElementById("new-device-asset").value = "";
+				} else {
+					window.alert("A location must be added first");
+				}
 			}
 
 		// rename location

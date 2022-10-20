@@ -34,7 +34,7 @@ class Device extends ArrayMapItem {
 	}
 
 	initDom() {
-		this.dom.init(this.id);
+		this.dom.init(this.key);
 		this.updateDom();
 	}
 

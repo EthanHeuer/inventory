@@ -49,6 +49,9 @@ function toggleClass(node, bool, className) {
 class ArrayMapItem {
 	key;
 
+	/**
+	 * @param {String} key
+	 */
 	constructor (key) {
 		this.key = key;
 	}
@@ -68,7 +71,7 @@ class ArrayMap {
 	 */
 	getIndex(key) {
 		for (let i = 0; i < this.#data.length; i ++) {
-			if (this.#data[i].id === key) return i;
+			if (this.#data[i].key === key) return i;
 		}
 
 		return -1;
@@ -92,6 +95,7 @@ class ArrayMap {
 	/**
 	 * Get element by index
 	 * @param {Integer} index array index
+	 * @return {ArrayMapItem}
 	 */
 	at(index) {
 		if (index >= 0 && index < this.#data.length) {

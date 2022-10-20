@@ -56,7 +56,7 @@ class App {
 		for (let l = 0; l < this.locations.length(); l ++) {
 			document.getElementById("location-list").appendChild(this.locations.at(l).dom.parent);
 
-			toggleClass(this.locations.at(l).dom.parent, this.locations.at(l).id === this.active_location_id, "selected");
+			toggleClass(this.locations.at(l).dom.parent, this.locations.at(l).key === this.active_location_id, "selected");
 		}
 	}
 
@@ -88,7 +88,7 @@ class App {
 		for (let l = 0; l < this.locations.length(); l ++) {
 			let loc = this.locations.at(l);
 
-			toggleClass(loc.dom.parent, loc.id === this.active_location_id, "selected");
+			toggleClass(loc.dom.parent, loc.key === this.active_location_id, "selected");
 		}
 	}
 
