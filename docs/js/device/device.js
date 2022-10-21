@@ -20,7 +20,7 @@ class Device extends ArrayMapItem {
 	model;
 	type;
 	time;
-	dom = new DeviceDOM();
+	dom;
 
 	constructor (asset, model, type, id) {
 		super(id);
@@ -29,12 +29,8 @@ class Device extends ArrayMapItem {
 		this.model = model;
 		this.type = type;
 		this.time = Date.now();
+		this.dom = new DeviceDOM(id);
 
-		this.initDom();
-	}
-
-	initDom() {
-		this.dom.init(this.key);
 		this.updateDom();
 	}
 

@@ -2,8 +2,7 @@ class Location extends ArrayMapItem {
 	name;
 	devices;
 	selected = false;
-	dom = new LocationDOM();
-
+	dom;
 	new_id = 0;
 
 	constructor (name, id) {
@@ -11,12 +10,7 @@ class Location extends ArrayMapItem {
 		
 		this.name = name;
 		this.devices = new ArrayMap();
-
-		this.initDom();
-	}
-
-	initDom() {
-		this.dom.init(this.key);
+		this.dom = new LocationDOM(id);
 
 		this.updateDom();
 	}

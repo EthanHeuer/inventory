@@ -1,20 +1,3 @@
-.icon {
-	background-color: transparent;
-	font-size: 1.25em;
-	width: 1.5em;
-	height: 1.5em;
-	padding: 0;
-	opacity: 0.5;
-	border-radius: 50%;
-	
-	transition: all 0.15s ease-in-out;
-}
-
-.icon:hover {
-	background-color: rgba(0, 0, 0, 0.2);
-	opacity: 1;
-}
-
 .icon-input input, .icon-input select {
 	background-color: transparent;
 	padding: 0.5em 0.5em;
@@ -32,24 +15,24 @@
 }
 
 #nav {
-	background-color: rgba(255, 255, 255, 0.01);
-	border-right: 2px solid rgba(255, 255, 255, 0.2);
+	background-color: hsl(220, 15%, 15%);
+	border-right: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 #header {
-	background-color: hsl(220, 0%, 15%);
-	border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+	background-color: hsl(220, 0%, 25%);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 #header .icon-input,
 #header .icon-input input,
 #header .icon-input select {
-	background-color: hsl(220, 0%, 18%);
+	background-color: hsl(220, 0%, 24%);
 }
 
 #location-header {
+	color: hsl(220, 0%, 50%);
 	font-size: 1.5em;
-	opacity: 0.5;
 	text-align: center;
 }
 
@@ -62,8 +45,8 @@
 /* LOCATION STYLE */
 
 .location {
-	background-color: rgba(255, 255, 255, 0.03);
-	border: 2px solid transparent;
+	background-color: hsl(220, 20%, 20%);
+	border: 1px solid transparent;
 	font-size: 1em;
 	border-radius: 0.5em;
 	padding: 1em 0.5em;
@@ -73,12 +56,12 @@
 }
 
 .location:hover {
-	background-color: rgba(255, 255, 255, 0.05);
+	background-color: hsl(220, 20%, 22%);
 }
 
 .location.selected {
-	background-color: rgba(255, 255, 255, 0.07);
-	border: 2px solid rgba(255, 255, 255, 0.2);
+	background-color: hsl(220, 20%, 24%);
+	border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .location.selected .location-name,
@@ -114,7 +97,7 @@
 }
 
 .device {
-	background-color: hsl(220, 0%, 13%);
+	background-color: hsl(220, 0%, 17%);
 	border-radius: 1em;
 	display: inline-flex;
 	margin: 0.25em;
@@ -124,7 +107,7 @@
 
 .device input,
 .device select {
-	background-color: hsl(220, 0%, 13%);
+	background-color: hsl(220, 0%, 17%);
 	border-radius: 1px;
 	padding: 0.25em 0.5em;
 }

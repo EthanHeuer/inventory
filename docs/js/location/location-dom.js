@@ -2,13 +2,13 @@
  * DOM for a location object
  */
 class LocationDOM {
-	parent;
+	parent; 
 	name;
 	rename;
 	count;
 	remove;
 
-	init(id) {
+	constructor (id) {
 		let item = DOM(null, "div", {classList: "flex-box horizontal gap location center",
 			dataset: {action: AppAction.LOCATION_VIEW, id: id}});
 
