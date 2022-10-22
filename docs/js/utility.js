@@ -122,6 +122,8 @@ class ArrayMap {
 		if (index !== -1) {
 			return this.#data.splice(index, 1);
 		}
+
+		return null;
 	}
 
 	/**

@@ -24,7 +24,7 @@ class AppAction {
 class App {
 	locations = new ArrayMap();
 	active_location_id = -1;
-	current_location_id = 0;
+	next_location_id = 0;
 
 	static LOCALSTORAGE_KEY = "inventory";
 
@@ -52,14 +52,14 @@ class App {
 	}
 
 	addLocation(name) {
-		this.locations.push(new Location(name, this.current_location_id));
+		this.locations.push(new Location(name, this.next_location_id));
 
-		this.active_location_id = this.current_location_id;
+		this.active_location_id = this.next_location_id;
 		
 		document.getElementById("location-list").appendChild(this.activeLocation().dom.parent);
 		this.updateDeviceDom();
 
-		this.current_location_id += 1;
+		this.next_location_id += 1;
 	}
 
 	updateDom() {
@@ -72,6 +72,7 @@ class App {
 
 	activeLocation() { return this.locations.get(this.active_location_id); }
 }
+
 
 
 /**
@@ -207,7 +208,7 @@ App.prototype.init = function () {
 App.prototype.dataClear = function () {
 	if (window.confirm("Are you sure you want to delete all locations and all devices?")) {
 		this.active_location_id = -1;
-		this.current_location_id = 0;
+		this.next_location_id = 0;
 		this.locations = new ArrayMap();
 
 		window.localStorage.removeItem(App.LOCALSTORAGE_KEY);

@@ -1,10 +1,17 @@
+/**
+ * Object to store a location and its data
+ */
 class Location extends ArrayMapItem {
 	name;
 	devices;
-	selected = false;
 	dom;
-	new_id = 0;
+	selected = false;
+	next_device_id = 0;
 
+	/**
+	 * @param {String} name location name
+	 * @param {Number} id key and id for the array map
+	 */
 	constructor (name, id) {
 		super(id);
 		
@@ -22,9 +29,9 @@ class Location extends ArrayMapItem {
 	}
 
 	addDevice(asset, model, type) {
-		this.devices.push(new Device(asset, model, type, this.new_id));
+		this.devices.push(new Device(asset, model, type, this.next_device_id));
 
-		this.new_id += 1;
+		this.next_device_id += 1;
 		this.updateDom();
 	}
 
