@@ -30,43 +30,19 @@
 	</div>
 
 	<!-- BODY -->
-	<div class="flex flex-box vertical gap">
+	<div class="flex flex-box vertical">
+		<input class="flex" id="sheet-name">
 
-		<!-- HEADER -->
-		<div class="flex-box horizontal center gap pad" id="header">
-			<!-- device asset -->
-			<div class="flex-box horizontal icon-input">
+		<!-- DEVICES -->
+		<div class="flex flex-box vertical no-scroll" id="body">
+			<div class="scroll flex-box" id="device-list"></div>
+			
+			<div class="flex-box horizontal absolute icon-input" id="new-device-asset-holder">
 				<span class="material-symbols-outlined">add</span>
 				<input data-action="device-new" placeholder="Asset" id="new-device-asset">
 			</div>
-	
-			<!-- device model -->
-			<div class="flex-box horizontal icon-input">
-				<span class="material-symbols-outlined">devices</span>
-				<select id="new-device-model">
-					<option value="HP">HP</option>
-					<option value="Mac">Mac</option>
-				</select>
-			</div>
-	
-			<!-- device type -->
-			<div class="flex-box horizontal icon-input">
-				<span class="material-symbols-outlined">person</span>
-				<select id="new-device-type">
-					<option value="Student">Student</option>
-					<option value="Loaner">Loaner</option>
-					<option value="Faculty">Faculty</option>
-				</select>
-			</div>
-	
-			<input class="flex" id="sheet-name">
 		</div>
 
-		<!-- DEVICES -->
-		<div class="flex flex-box vertical no-scroll gap" id="body">
-			<div id="location-header"></div>
-			<div class="scroll flex-box" id="device-list"></div>
-		</div>
 	</div>
 
 </div>
