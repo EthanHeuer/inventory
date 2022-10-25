@@ -131,4 +131,9 @@ class ArrayMap {
 	 * @return {Number}
 	 */
 	length() { return this.#data.length; }
+
+	/**
+	 * Return the last item in the list
+	 */
+	back() { return this.#data[this.#data.length - 1]; }
 }

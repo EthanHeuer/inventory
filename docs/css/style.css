@@ -91,7 +91,7 @@
 }
 
 .device {
-	background-color: hsl(220, 0%, 17%);
+	background-color: hsl(220, 0%, 15%);
 	border-radius: 1em;
 	display: inline-flex;
 	margin: 0.25em;
@@ -101,11 +101,29 @@
 
 .device input,
 .device select {
-	background-color: hsl(220, 0%, 17%);
+	background-color: hsl(220, 0%, 15%);
 	border-radius: 1px;
 	padding: 0.25em 0.5em;
 }
 
 .device-asset {
 	width: 6em;
+}
+
+.flash {
+	animation: device-flash 0.3s linear forwards;
+}
+
+@keyframes device-flash {
+	0% {
+		opacity: 0;
+		box-shadow: 0 0 0 0px #e0e0e0;
+	}
+	50% {
+		box-shadow: 0 0 0 2px #e0e0e0;
+	}
+	100% {
+		opacity: 1;
+		box-shadow: 0 0 0 0px #e0e0e0;
+	}
 }

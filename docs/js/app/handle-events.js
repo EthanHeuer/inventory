@@ -72,8 +72,13 @@ App.prototype.handleKeyUp = function (event) {
 						document.getElementById("new-device-model").value,
 						document.getElementById("new-device-type").value
 					);
+
+					this.activeLocation().devices.back().dom.parent.classList.add("flash");
 		
-					this.updateDeviceDom();
+					document.getElementById("device-list").insertBefore(
+						this.activeLocation().devices.back().dom.parent,
+						document.getElementById("device-list").childNodes[0]
+					);
 		
 					document.getElementById("new-device-asset").value = "";
 				} else {

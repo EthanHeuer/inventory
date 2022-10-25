@@ -70,6 +70,9 @@ class App {
 		}
 	}
 
+	/**
+	 * @return {Location}
+	 */
 	activeLocation() { return this.locations.get(this.active_location_id); }
 }
 
