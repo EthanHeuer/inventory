@@ -1,7 +1,7 @@
 /**
  * Object to store a location and its data
  */
-class Location extends ArrayMapItem {
+class LocationPlace extends ArrayMapItem {
 	name;
 	devices;
 	dom;

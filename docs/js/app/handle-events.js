@@ -67,11 +67,7 @@ App.prototype.handleKeyUp = function (event) {
 			if (event.key === "Enter") {
 
 				if (this.active_location_id !== -1) {
-					this.activeLocation().addDevice(
-						document.getElementById("new-device-asset").value,
-						document.getElementById("new-device-model").value,
-						document.getElementById("new-device-type").value
-					);
+					this.activeLocation().addDevice(document.getElementById("new-device-asset").value);
 
 					this.activeLocation().devices.back().dom.parent.classList.add("flash");
 		

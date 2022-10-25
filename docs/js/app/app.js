@@ -40,19 +40,16 @@ class App {
 
 	updateDeviceDom() {
 		document.getElementById("device-list").innerHTML = "";
-		document.getElementById("location-header").innerHTML = "";
 
 		if (this.active_location_id !== -1) {
 			for (let d = this.activeLocation().devices.length() - 1; d >= 0; d --) {
 				document.getElementById("device-list").appendChild(this.activeLocation().devices.at(d).dom.parent);
 			}
-
-			document.getElementById("location-header").innerHTML = this.activeLocation().name;
 		}
 	}
 
 	addLocation(name) {
-		this.locations.push(new Location(name, this.next_location_id));
+		this.locations.push(new LocationPlace(name, this.next_location_id));
 
 		this.active_location_id = this.next_location_id;
 		
@@ -71,7 +68,7 @@ class App {
 	}
 
 	/**
-	 * @return {Location}
+	 * @return {LocationPlace}
 	 */
 	activeLocation() { return this.locations.get(this.active_location_id); }
 }
@@ -84,6 +81,51 @@ class App {
 App.prototype.init = function () {
 	// load data from localstorage
 	let parse = JSON.parse(window.localStorage.getItem(App.LOCALSTORAGE_KEY)) || [];
+
+	/*
+
+	let tempVal = (value, prob, result) => {
+		let sum = 0;
+
+		for (let r = 0; r < prob.length; r ++) {
+			let old_sum = sum;
+			sum += prob[r];
+
+			if (value >= old_sum && value < sum) {
+				return result[r];
+			}
+		}
+	};
+
+	// generate random data
+
+	parse = [];
+
+	for (let l = 0; l < 20; l ++) {
+		parse.push([`Location ${l + 1}`, []]);
+
+		for (let d = 0; d < 50; d ++) {
+			let asset = "";
+
+			let year = tempVal(Math.random(),
+				[0.2, 0.35, 0.3, 0.1, 0.05],
+				["2022", "2021", "2020", "2019", "2018"]
+			);
+
+			let purpose = tempVal(Math.random(),
+				[0.1, 0.05, 0.5, 0.35],
+				["550", "554", "11", "20"]
+			);
+
+			let id = ("" + (1000 + Math.floor(Math.random() * 1000))).split("").splice(1 + purpose.length - 2, 4).join("");
+
+			asset = year + purpose + id;
+
+			parse[l][1].push([asset]);
+		}
+	}t
+	*/
+
 
 	for (let location of parse) {
 		this.addLocation(location[0]);
