@@ -28,8 +28,8 @@ class LocationPlace extends ArrayMapItem {
 		this.dom.count.innerHTML = this.devices.length();
 	}
 
-	addDevice(asset, model, type) {
-		this.devices.push(new Device(asset, model, type, this.next_device_id));
+	addDevice(asset) {
+		this.devices.push(new Device(asset, this.next_device_id));
 
 		this.next_device_id += 1;
 		this.updateDom();

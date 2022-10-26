@@ -71,7 +71,7 @@ class Device extends ArrayMapItem {
 			}
 		});
 
-		this.dom.tag.value = tags.join(" ");
+		this.dom.tag.innerHTML = tags.join(" ");
 	}
 
 	export() {

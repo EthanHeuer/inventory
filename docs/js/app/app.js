@@ -131,14 +131,9 @@ App.prototype.init = function () {
 		this.addLocation(location[0]);
 
 		for (let device of location[1]) {
-			this.activeLocation().addDevice(... device);
+			this.activeLocation().addDevice(device);
 		}
 	}
-	
-	// set the sheet name
-	var DATE = new Date();
-	document.getElementById("sheet-name").value = `inventory-${DATE.getMonth() + 1}-${DATE.getDate()}-${DATE.getFullYear()}`;
-	document.title = document.getElementById("sheet-name").value;
 
 	// load events
 	window.addEventListener("click", (event) => { this.handleClick(event); });
@@ -236,9 +231,14 @@ App.prototype.init = function () {
 	}
 
 	// download
+	
+	// set the sheet name
+	let DATE = new Date();
+	let sheet_name = `inventory-${DATE.getMonth() + 1}-${DATE.getDate()}-${DATE.getFullYear()}`;
+
 	let a = window.document.createElement("a");
 	a.href = window.URL.createObjectURL(new Blob([res.join("\n")], {type: 'text/tsv'}));
-	a.download = `${document.getElementById("sheet-name").value}.tsv`;
+	a.download = `${sheet_name}.tsv`;
 
 	document.body.appendChild(a);
 	a.click();
@@ -278,7 +278,7 @@ App.prototype.dataSave = function () {
 		for (let d = 0; d < loc.devices.length(); d ++) {
 			let device = loc.devices.at(d);
 
-			res.push([device.asset, device.model, device.type]);
+			res.push([device.asset]);
 		}
 
 		output.push([loc.name, res]);
