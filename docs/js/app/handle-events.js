@@ -7,18 +7,12 @@ App.prototype.handleClick = function (event) {
 
 		// select a location to view
 		case AppAction.LOCATION_VIEW:
-			this.active_location_id = id;
+			if (id !== this.active_location_id) {
+				this.active_location_id = id;
 
-			this.updateDom();
-			this.updateDeviceDom();
-
-		// change devices type
-		break; case AppAction.DEVICE_TYPE:
-			this.activeLocation().devices.get(id).type = event.target.value;
-
-		// change devices model
-		break; case AppAction.DEVICE_MODEL:
-			this.activeLocation().devices.get(id).model = event.target.value;
+				this.updateDom();
+				this.updateDeviceDom();
+			}
 		
 		// remove device from active location
 		break; case AppAction.DEVICE_REMOVE:
@@ -65,7 +59,6 @@ App.prototype.handleKeyUp = function (event) {
 		// new device
 		case AppAction.DEVICE_NEW:
 			if (event.key === "Enter") {
-
 				if (this.active_location_id !== -1) {
 					this.activeLocation().addDevice(document.getElementById("new-device-asset").value);
 

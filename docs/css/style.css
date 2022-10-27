@@ -107,8 +107,6 @@
 .device-asset {
 	width: 6em;
 }
-.device-tag {
-}
 
 .flash {
 	animation: device-flash 0.3s linear forwards;

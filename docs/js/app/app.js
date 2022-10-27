@@ -3,8 +3,6 @@
  */
 class AppAction {
 	static DEVICE_ASSET = "device-asset";
-	static DEVICE_MODEL = "device-model";
-	static DEVICE_TYPE = "device-type";
 	static DEVICE_REMOVE = "device-remove";
 	static DEVICE_NEW = "device-new";
 
