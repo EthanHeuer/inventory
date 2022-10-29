@@ -85,27 +85,20 @@
 }
 
 .device {
-	background-color: hsl(220, 0%, 14%);
-	border-radius: 1em;
+	background-color: hsl(220, 0%, 17%);
+	border-radius: 0.5em;
 	display: inline-flex;
 	margin: 0.25em;
 
 	transition: all 0.15s ease-in-out;
 }
 
-.device input, .device span {
+.device .tag {
+	background-color: rgba(0, 0, 0, 0.15);
+	padding: 0.5em;
+	border-radius: 0.5em;
 	color: hsl(220, 0%, 70%);
 	font-size: 0.9em;
-}
-
-.device input {
-	background-color: hsl(220, 0%, 13%);
-	border-radius: 0.5em;
-	padding: 0.5em 0.5em;
-}
-
-.device-asset {
-	width: 6em;
 }
 
 .flash {

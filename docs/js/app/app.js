@@ -80,51 +80,6 @@ App.prototype.init = function () {
 	// load data from localstorage
 	let parse = JSON.parse(window.localStorage.getItem(App.LOCALSTORAGE_KEY)) || [];
 
-	/*
-
-	let tempVal = (value, prob, result) => {
-		let sum = 0;
-
-		for (let r = 0; r < prob.length; r ++) {
-			let old_sum = sum;
-			sum += prob[r];
-
-			if (value >= old_sum && value < sum) {
-				return result[r];
-			}
-		}
-	};
-
-	// generate random data
-
-	parse = [];
-
-	for (let l = 0; l < 20; l ++) {
-		parse.push([`Location ${l + 1}`, []]);
-
-		for (let d = 0; d < 50; d ++) {
-			let asset = "";
-
-			let year = tempVal(Math.random(),
-				[0.2, 0.35, 0.3, 0.1, 0.05],
-				["2022", "2021", "2020", "2019", "2018"]
-			);
-
-			let purpose = tempVal(Math.random(),
-				[0.1, 0.05, 0.5, 0.35],
-				["550", "554", "11", "20"]
-			);
-
-			let id = ("" + (1000 + Math.floor(Math.random() * 1000))).split("").splice(1 + purpose.length - 2, 4).join("");
-
-			asset = year + purpose + id;
-
-			parse[l][1].push([asset]);
-		}
-	}t
-	*/
-
-
 	for (let location of parse) {
 		this.addLocation(location[0]);
 
@@ -276,7 +231,7 @@ App.prototype.dataSave = function () {
 		for (let d = 0; d < loc.devices.length(); d ++) {
 			let device = loc.devices.at(d);
 
-			res.push([device.asset]);
+			res.push(device.asset);
 		}
 
 		output.push([loc.name, res]);

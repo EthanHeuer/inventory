@@ -25,11 +25,12 @@ class Device extends ArrayMapItem {
 	dom;
 
 	static REGEX = [
-		[/^(?<year>\d\d\d\d)(?<purpose>550)(?<id>\d\d)$/m, ["HP", "Loaner"]],
-		[/^(?<year>\d\d\d\d)(?<purpose>554)(?<id>\d\d)$/m, ["Mac", "Loaner"]],
-		[/^(?<year>\d\d\d\d)(?<purpose>11)(?<id>\d\d\d)$/m, ["HP", "Student"]],
-		[/^(?<year>\d\d\d\d)(?<purpose>20)(?<id>\d\d\d)$/m, ["Mac", "Student"]],
-		[/^C-(?<id>\d\d\d\d\d)$/m, ["", "Faculty"]]
+		[/^(?<year>\d\d\d\d)(?<purpose>550)(?<id>\d\d)$/m, ["HP", "Loaner", true]],
+		[/^(?<year>\d\d\d\d)(?<purpose>554)(?<id>\d\d)$/m, ["Mac", "Loaner", true]],
+		[/^(?<year>\d\d\d\d)(?<purpose>11)(?<id>\d\d\d)$/m, ["HP", "Student", true]],
+		[/^(?<year>\d\d\d\d)(?<purpose>20)(?<id>\d\d\d)$/m, ["Mac", "Student", true]],
+		[/^C-(?<id>\d\d\d\d\d)$/m, ["", "Faculty", false]],
+		[/^LP-(?<id>\d\d\d\d)$/m, ["Printer", "", false]]
 	];
 
 	constructor (asset, id) {
@@ -51,7 +52,7 @@ class Device extends ArrayMapItem {
 				this.model = Device.REGEX[r][1][0];
 				this.type = Device.REGEX[r][1][1];
 
-				if (this.type !== "Faculty") {
+				if (Device.REGEX[r][1][2]) {
 					this.year = res.groups.year;
 				}
 
@@ -61,17 +62,13 @@ class Device extends ArrayMapItem {
 	}
 
 	updateDom() {
-		this.dom.asset.value = this.asset;
+		this.dom.tag.innerHTML = "";
 
-		let tags = [];
-
-		[this.year, this.model, this.type].forEach(e => {
+		[this.asset, this.year, this.model, this.type].forEach(e => {
 			if (e !== "") {
-				tags.push(e);
+				DOM(this.dom.tag, "span", {innerHTML: e, classList: "tag"});
 			}
 		});
-
-		this.dom.tag.innerHTML = tags.join(" ");
 	}
 
 	export() {
